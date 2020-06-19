@@ -31,8 +31,8 @@ exports.publishToQueue = async (queueName, data) => {
 exports.receiveMessage = (queueName) => {
   ch.consume(queueName, function (msg) {
     //setTimeout(function () {
-      console.log("Message:", msg.content.toString());
-      //ch.ack(msg);
+    console.log("Message:", msg.content.toString());
+    //ch.ack(msg);
     //}, 8000);
   }, {
     noAck: true
