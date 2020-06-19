@@ -8,7 +8,7 @@ router.use (function (req,res,next) {
 });
 
 router.get('/',function(req,res){
-  res.sendFile(path.resolve('views/index.html'));
+  res.status(200).json({ msg: 'Event Listener Running' });
 });
 
 module.exports = router;
