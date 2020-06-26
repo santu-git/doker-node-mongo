@@ -12,7 +12,7 @@ exports.create = function (req, res) {
   //console.log(JSON.parse(req.body.event)[0].data);
   let eventObj = JSON.parse(req.body.event)[0].data;
   eventObj['domain']= req.body.domain;
-  eventObj['ts']= eventObj.event.ts;
+  eventObj['ts']= new Date(eventObj.event.ts).toISOString();
   var newEvent = new Event(eventObj);
   newEvent.save(function (err) {
     if (err) {
