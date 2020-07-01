@@ -18,7 +18,7 @@ amqp.connect(CONN_URL, function (err, conn) {
       throw err;
     }
     channel.assertQueue(RABBITMQ_CHANNEL, {
-      durable: false
+      durable: true
     });
     ch = channel;
   });
