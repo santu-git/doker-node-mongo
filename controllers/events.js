@@ -24,6 +24,7 @@ exports.create = function (req, res) {
       console.log(err);
     } else {
       publishEvent(eventObj);
+      console.log(eventObj);
     }
   });
   res.status(204).send();
