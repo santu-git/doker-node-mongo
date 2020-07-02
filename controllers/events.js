@@ -11,7 +11,6 @@ const eventsToPublish = [
 ];
 const { RABBITMQ_CHANNEL } = process.env;
 
-mqService.receiveMessage(RABBITMQ_CHANNEL);
 exports.create = function (req, res) {
   //var newEvent = new Event(req.body);
   //console.log(req.body.event);

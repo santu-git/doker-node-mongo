@@ -1,9 +1,9 @@
-var amqp = require('amqplib/callback_api');
+var amqp = require("amqplib/callback_api");
 const {
   RABBITMQ_USER,
   RABBITMQ_PASS,
   RABBITMQ_HOST,
-  RABBITMQ_CHANNEL
+  RABBITMQ_CHANNEL,
 } = process.env;
 
 const CONN_URL = `amqp://${RABBITMQ_USER}:${RABBITMQ_PASS}@${RABBITMQ_HOST}`;
@@ -18,28 +18,33 @@ amqp.connect(CONN_URL, function (err, conn) {
       throw err;
     }
     channel.assertQueue(RABBITMQ_CHANNEL, {
-      durable: true
+      durable: true,
     });
     ch = channel;
+    receiveMessage(RABBITMQ_CHANNEL);
   });
 });
 
 exports.publishToQueue = async (queueName, data) => {
   ch.sendToQueue(queueName, new Buffer.from(data), { persistent: true });
-}
+};
 
 exports.receiveMessage = (queueName) => {
-  ch.consume(queueName, function (msg) {
-    //setTimeout(function () {
-    console.log("Message:", msg.content.toString());
-    //ch.ack(msg);
-    //}, 8000);
-  }, {
-    noAck: true
-  });
-}
+  ch.consume(
+    queueName,
+    function (msg) {
+      //setTimeout(function () {
+      console.log("Message:", msg.content.toString());
+      //ch.ack(msg);
+      //}, 8000);
+    },
+    {
+      noAck: true,
+    }
+  );
+};
 
-process.on('exit', (code) => {
+process.on("exit", (code) => {
   ch.close();
   console.log(`Closing rabbitmq channel`);
 });
