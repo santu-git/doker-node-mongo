@@ -24,7 +24,6 @@ exports.create = function (req, res) {
       console.log(err);
     } else {
       publishEvent(eventObj);
-      console.log(eventObj);
     }
   });
   res.status(204).send();
@@ -32,6 +31,7 @@ exports.create = function (req, res) {
 
 function publishEvent(eventObj) {
   if (eventsToPublish.includes(eventObj.id)) {
+    console.log(JSON.stringify(eventObj));
     mqService.publishToQueue(RABBITMQ_CHANNEL, JSON.stringify(eventObj));
   }
 }
