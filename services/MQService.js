@@ -21,7 +21,6 @@ amqp.connect(CONN_URL, function (err, conn) {
       durable: true,
     });
     ch = channel;
-    receiveMessage(RABBITMQ_CHANNEL);
   });
 });
 
